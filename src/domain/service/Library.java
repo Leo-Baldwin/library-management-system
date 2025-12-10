@@ -177,7 +177,7 @@ public class Library {
         MediaItem item = items.get(mediaId);
         Loan loan = findOpenLoanByMediaId(mediaId);
 
-        // Gets current date and calculate any fine accrued
+        // Gets current date and calculates any fine accrued
         LocalDate returnDate = LocalDate.now();
         int fine = finePolicy.calculateFine(loan.getDueDate(), returnDate);
 

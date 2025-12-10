@@ -122,7 +122,7 @@ All fields are private with controlled access via getters/setters.
 
 •	Console I/O
 
-•	UML (Lucid)
+•	UML
 
 •	No frameworks or external libraries
 
