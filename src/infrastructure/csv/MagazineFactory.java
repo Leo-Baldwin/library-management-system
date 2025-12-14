@@ -2,6 +2,9 @@ package infrastructure.csv;
 
 import domain.model.Magazine;
 
+/**
+ * An implementation class of CSV factory responsible for creating {@link Magazine} objects from CSV row data.
+ */
 public class MagazineFactory implements CsvFactory<Magazine> {
     @Override
     public Magazine fromRow(String[] r) {

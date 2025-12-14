@@ -238,14 +238,22 @@ public class Library {
 
     // ---------------------------------------- Lookups and Listings -------------------------
 
+    /** @return a list of all the media items held in the library */
     public List<MediaItem> listItems() {
         return new ArrayList<>(items.values());
     }
 
+    /** @return a list of all the members of the library */
     public List<Member> listMembers() {
         return new ArrayList<>(members.values());
     }
 
+    /**
+     * Searches for and returns a list of all media containing a specified keyword.
+     *
+     * @param keyword string used to filter media items
+     * @return the list of media items containing the keyword
+     */
     public List<MediaItem> searchMedia(String keyword) {
         if (keyword == null) keyword = "";
         String q = keyword.toLowerCase();
@@ -269,6 +277,12 @@ public class Library {
         return results;
     }
 
+    /**
+     * Searches for and returns a list of all members whose names contain a specified keyword.
+     *
+     * @param keyword string used to filter members
+     * @return the list of members with names containing the keyword
+     */
     public List<Member> searchMembers(String keyword) {
         if (keyword == null) keyword = "";
         String q = keyword.toLowerCase();
@@ -319,6 +333,12 @@ public class Library {
         throw new ValidationException("No open loan found for mediaId: " + mediaId);
     }
 
+    /**
+     * Checks whether a member has any current overdue loans.
+     *
+     * @param memberId the ID of the member being checked for overdue loans.
+     * @return {@code true} if the member has overdue loans, else returns {@code false}
+     */
     private boolean memberHasOverdueLoans (UUID memberId) {
         LocalDate date = LocalDate.now();
 

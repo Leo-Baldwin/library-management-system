@@ -2,6 +2,10 @@ package domain.policy;
 
 import java.time.LocalDate;
 
+/**
+ * A standard implementation of the {@link LoanPolicy} interface that calculates a due date by
+ * adding a fixed number of days to the loan date.
+ */
 public class StandardLoanPolicy implements LoanPolicy {
 
     /** Number of days to add to the loan starting date to get the due date. */

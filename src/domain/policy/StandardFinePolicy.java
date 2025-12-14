@@ -3,6 +3,10 @@ package domain.policy;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/**
+ * A standard implementation of the {@link FinePolicy} interface that calculates overdue fines using a
+ * fixed daily rate.
+ */
 public class StandardFinePolicy implements FinePolicy {
 
     /** Fine to be applied for each overdue day, in pence. */

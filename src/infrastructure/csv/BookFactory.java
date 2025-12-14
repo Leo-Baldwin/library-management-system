@@ -2,6 +2,9 @@ package infrastructure.csv;
 
 import domain.model.Book;
 
+/**
+ * An implementation class of CSV factory responsible for creating {@link Book} objects from CSV row data.
+ */
 public class BookFactory implements CsvFactory<Book> {
     @Override
     public Book fromRow(String[] r) {

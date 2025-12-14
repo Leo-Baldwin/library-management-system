@@ -2,6 +2,9 @@ package infrastructure.csv;
 
 import domain.model.Dvd;
 
+/**
+ * An implementation class of CSV factory responsible for creating {@link Dvd} objects from CSV row data.
+ */
 public class DvdFactory implements CsvFactory<Dvd> {
     @Override
     public Dvd fromRow(String[] r) {
