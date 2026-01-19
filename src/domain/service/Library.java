@@ -114,9 +114,6 @@ public class Library {
      * @param memberId the ID of the member to remove
      */
     public void removeMember(UUID memberId) {
-        // Retrieves the member from members Map by their ID
-        Member member = members.get(memberId);
-
         if (memberHasOverdueLoans(memberId)) {
             throw new ValidationException("Cannot remove: member has overdue loans");
         }

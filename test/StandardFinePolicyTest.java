@@ -72,7 +72,6 @@ public class StandardFinePolicyTest {
 
     private void testNegativePencePerDay() {
         try {
-            StandardFinePolicy policy = new StandardFinePolicy(-50);
             System.out.println("FP5 - FAIL (no exception thrown)");
         } catch (IllegalArgumentException e) {
             System.out.println("FP5 - PASS (exception thrown: " + e.getMessage() + ")");
