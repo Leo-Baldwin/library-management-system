@@ -1,153 +1,140 @@
-📚 Library Management System
-
-A Java Console Application demonstrating Clean OOP Architecture
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-📖 Overview
-
-The Library Management System (LMS) is a fully object-oriented Java console application designed for an Advanced OOP module. The project focuses on clean architecture, maintainable code, and strong use of OOP principles.
-
-The application supports:
-
-•	Media item management (Books, DVDs, Magazines)
-
-•	Member registration and validation
-
-•	Loan processing (checkout and return)
-
-•	Fine calculation
-
-•	Reservation queueing
-
-•	Console-based interaction
-
-•	Strategy pattern for flexible business rules
-
-•	Custom exception handling for domain validation
-
-It is built for clarity, extensibility, and demonstration of good software engineering practices.
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-✨ Features
-
-Media Management
-
-•	Add, list, and manage media items
-
-•	Supports Books, DVDs, and Magazines
-
-•	Status tracking: AVAILABLE, ON_LOAN, RESERVED
-
-Member Management
-
-•	Register new library members
-
-•	Track active/inactive status
-
-•	Borrowing restrictions applied automatically
-
-Loan System
-
-•	Checkout items with automatic due date calculation
-
-•	Return items with automatic fine calculation
-
-•	Full loan history tracking
-
-•	Strategy-based policies (LoanPolicy, FinePolicy)
-
-Reservation Handling
-
-•	FIFO reservation queue
-
-•	Auto-fulfillment when items are returned
-
-•	Multiple media types supported
-
-•	Clear lifecycle: ACTIVE, FULFILLED, CANCELLED
-
-Exception Handling
-
-•	Custom ValidationException for domain rule violations
-
-•	Clean and consistent error feedback
-
-•	Separation of business errors from programming errors
-
-Console UI
-
-A simple, intuitive menu for interacting with the system:
-
-•	List items
-
-•	List members
-
-•	Checkout item
-
-•	Return item
-
-•	Reserve item
-
-•	Add new media
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-🧩 Design Patterns & OOP Concepts
-
-Strategy Pattern
-
-Used for loan duration and fine calculation policies.
-Enables swapping rules without touching domain logic.
-
-Custom Exceptions
-
-ValidationException clearly separates domain-level rule violations from internal technical errors.
-
-Inheritance & Abstraction
-
-MediaItem → Book, Dvd, Magazine
-Person → Member (and optionally Librarian)
-
-Encapsulation
-
-All fields are private with controlled access via getters/setters.
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-🔧 Technologies
-
-•	Java (Standard JDK)
-
-•	Console I/O
-
-•	UML
-
-•	No frameworks or external libraries
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-🚀 Future Improvements
-
-•	JSON or file-based persistence
-
-•	GUI (JavaFX or Swing)
-
-•	Authentication for librarians
-
-•	Enhanced searching & reporting tools
-
-•	Configurable loan/fine rules per media type
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-📄 License
-
-MIT License — free to modify and use.
-
-⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻⸻
-
-🙋‍♂️ Author
+# Library Management System
+
+A Java console application demonstrating clean OOP architecture for managing media items, members, loans, fines, and reservations.
+
+## Overview
+
+The Library Management System (LMS) is designed for an Advanced OOP module and emphasizes maintainable design, clear separation of concerns, and extensibility.
+
+Key capabilities include:
+- Media item management (Books, DVDs, Magazines)
+- Member registration and validation
+- Loan processing (checkout/return) and fine calculation
+- Reservation queueing with lifecycle states
+- Strategy-based policies for loan durations and fines
+- Custom exception handling for domain validation
+
+## Features
+
+- Media management with availability tracking (`AVAILABLE`, `ON_LOAN`, `RESERVED`)
+- Member status and borrowing restrictions
+- Loan history tracking with automatic due date and fine calculation
+- FIFO reservation queue with auto-fulfillment
+- Console-driven workflow for common tasks
+
+## Architecture
+
+The project follows a layered, OOP-focused structure:
+- `domain/`: core entities, policies, and domain services
+- `app/`: application entry point
+- `presentation/`: console UI and interaction layer
+- `infrastructure/`: storage or integration concerns (as needed)
+- `common/`: shared utilities and exceptions
+
+### Class Relationships (High-Level)
+
+```mermaid
+classDiagram
+    class MediaItem
+    class Book
+    class Dvd
+    class Magazine
+    class Person
+    class Member
+    class Loan
+    class Reservation
+    class LoanPolicy
+    class FinePolicy
+
+    MediaItem <|-- Book
+    MediaItem <|-- Dvd
+    MediaItem <|-- Magazine
+    Person <|-- Member
+    Loan --> MediaItem
+    Loan --> Member
+    Reservation --> MediaItem
+    Reservation --> Member
+    LoanPolicy <|.. StandardLoanPolicy
+    FinePolicy <|.. StandardFinePolicy
+```
+
+## Project Structure
+
+```
+src/
+  app/             # App entry point (main)
+  common/          # shared utilities/exceptions
+  domain/          # core model, policies, services
+  infrastructure/  # persistence/integration (if added)
+  presentation/    # console UI
+  resources/
+test/              # simple main-based tests
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Java 11+ (Java 8 may work, but 11+ is recommended)
+
+### Build and Run
+
+```bash
+mkdir -p out
+javac -d out $(rg --files -g "*.java" src)
+java -cp out app.App
+```
+
+### Run the Tests
+
+Tests are simple `main`-based classes.
+
+```bash
+mkdir -p out
+javac -d out $(rg --files -g "*.java" src test)
+java -cp out LoanTest
+java -cp out StandardFinePolicyTest
+```
+
+## Usage
+
+When you start the app, follow the console menu to:
+- List items and members
+- Check out and return media
+- Add new media
+- Reserve items
+
+### Example Session (Abbreviated)
+
+```text
+1) List items
+2) List members
+3) Checkout item
+4) Return item
+5) Reserve item
+6) Add new media
+Select option: 3
+```
+
+## Design Patterns & OOP Concepts
+
+- Strategy pattern for `LoanPolicy` and `FinePolicy`
+- Custom `ValidationException` for domain rule violations
+- Inheritance for media types and people
+- Encapsulation with controlled accessors
+
+## Future Improvements
+
+- JSON or file-based persistence
+- GUI (JavaFX or Swing)
+- Authentication for librarians
+- Enhanced searching/reporting
+- Configurable loan/fine rules per media type
+
+## License
+
+MIT License
+
+## Author
 
 Leo Baldwin
