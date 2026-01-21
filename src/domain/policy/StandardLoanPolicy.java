@@ -1,5 +1,7 @@
 package domain.policy;
 
+import domain.model.MediaItem;
+
 import java.time.LocalDate;
 
 /**
@@ -30,7 +32,7 @@ public class StandardLoanPolicy implements LoanPolicy {
      * {@inheritDoc}
      */
     @Override
-    public LocalDate calculateDueDate(LocalDate loanDate) {
+    public LocalDate calculateDueDate(MediaItem mediaItem, LocalDate loanDate) {
         if (loanDate == null) {
             throw new IllegalArgumentException("loanDate cannot be null");
         }

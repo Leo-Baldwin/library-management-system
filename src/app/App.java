@@ -1,11 +1,18 @@
 package app;
 
+import domain.model.Book;
+import domain.model.Dvd;
+import domain.model.Magazine;
+import domain.model.MediaItem;
 import domain.policy.FinePolicy;
 import domain.policy.LoanPolicy;
-import domain.policy.StandardFinePolicy;
-import domain.policy.StandardLoanPolicy;
+import domain.policy.MediaTypeFinePolicy;
+import domain.policy.MediaTypeLoanPolicy;
 import domain.service.Library;
 import presentation.ConsoleMenu;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class App {
 
@@ -17,8 +24,17 @@ public class App {
     public static void main(String[] args) {
 
         // Injects policy interfaces with their configurations and creates Library object
-        LoanPolicy loanPolicy = new StandardLoanPolicy(14);        // 14 day loan period
-        FinePolicy finePolicy = new StandardFinePolicy(50);     // 50 pence per day fine
+        Map<Class<? extends MediaItem>, Integer> loanDaysByType = new HashMap<>();
+        loanDaysByType.put(Book.class, 21);
+        loanDaysByType.put(Dvd.class, 7);
+        loanDaysByType.put(Magazine.class, 14);
+        LoanPolicy loanPolicy = new MediaTypeLoanPolicy(14, loanDaysByType);
+
+        Map<Class<? extends MediaItem>, Integer> fineRateByType = new HashMap<>();
+        fineRateByType.put(Book.class, 25);
+        fineRateByType.put(Dvd.class, 100);
+        fineRateByType.put(Magazine.class, 50);
+        FinePolicy finePolicy = new MediaTypeFinePolicy(50, fineRateByType);
         Library library = new Library(loanPolicy, finePolicy);
 
         DemoDataLoader.loadDemoData(library);

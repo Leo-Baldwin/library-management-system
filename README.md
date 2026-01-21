@@ -129,7 +129,6 @@ Select option: 3
 - GUI (JavaFX or Swing)
 - Authentication for librarians
 - Enhanced searching/reporting
-- Configurable loan/fine rules per media type
 
 ## License
 

@@ -152,7 +152,7 @@ public class Library {
 
         // Gets current date and calculates the loans due date
         LocalDate loanDate = LocalDate.now();
-        LocalDate dueDate = loanPolicy.calculateDueDate(loanDate);
+        LocalDate dueDate = loanPolicy.calculateDueDate(item, loanDate);
 
         // Creates new loan object and add to loans Map
         Loan loan = new Loan(member.getId(), item.getMediaId(), loanDate, dueDate);
@@ -176,7 +176,7 @@ public class Library {
 
         // Gets current date and calculates any fine accrued
         LocalDate returnDate = LocalDate.now();
-        int fine = finePolicy.calculateFine(loan.getDueDate(), returnDate);
+        int fine = finePolicy.calculateFine(item, loan.getDueDate(), returnDate);
 
         // Records fine amount
         loan.setFineAccrued(fine);

@@ -23,7 +23,7 @@ public class StandardFinePolicyTest {
         LocalDate due = LocalDate.of(2025, 11, 15);
         LocalDate returnDate = LocalDate.of(2025, 11, 13);
 
-        int fine = policy.calculateFine(due, returnDate);
+        int fine = policy.calculateFine(null, due, returnDate);
         if (fine == 0) {
             System.out.println("FP1 - PASS");
         }  else {
@@ -36,7 +36,7 @@ public class StandardFinePolicyTest {
         LocalDate due = LocalDate.of(2025, 11, 15);
         LocalDate returnDate = LocalDate.of(2025, 11, 15);
 
-        int fine = policy.calculateFine(due, returnDate);
+        int fine = policy.calculateFine(null, due, returnDate);
         if (fine == 0) {
             System.out.println("FP2 - PASS");
         }  else {
@@ -49,7 +49,7 @@ public class StandardFinePolicyTest {
         LocalDate due = LocalDate.of(2025, 11, 15);
         LocalDate returnDate = LocalDate.of(2025, 11, 16);
 
-        int fine = policy.calculateFine(due, returnDate);
+        int fine = policy.calculateFine(null, due, returnDate);
         if (fine == 50) {
             System.out.println("FP3 - PASS");
         }  else {
@@ -62,7 +62,7 @@ public class StandardFinePolicyTest {
         LocalDate due = LocalDate.of(2025, 11, 15);
         LocalDate returnDate = LocalDate.of(2025, 11, 20);
 
-        int fine = policy.calculateFine(due, returnDate);
+        int fine = policy.calculateFine(null, due, returnDate);
         if (fine == 250) {
             System.out.println("FP4 - PASS");
         }  else {

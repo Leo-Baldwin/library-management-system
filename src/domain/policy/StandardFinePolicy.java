@@ -1,5 +1,7 @@
 package domain.policy;
 
+import domain.model.MediaItem;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
@@ -35,7 +37,7 @@ public class StandardFinePolicy implements FinePolicy {
      * {@inheritDoc}
      */
     @Override
-    public int calculateFine(LocalDate dueDate, LocalDate returnDate) {
+    public int calculateFine(MediaItem mediaItem, LocalDate dueDate, LocalDate returnDate) {
         // Ensures that the difference between the two dates cannot be negative
         long daysLate = Math.max(0, ChronoUnit.DAYS.between(dueDate, returnDate));
         long total = daysLate * pencePerDay;
