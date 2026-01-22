@@ -130,10 +130,6 @@ Select option: 3
 - Authentication for librarians
 - Enhanced searching/reporting
 
-## License
-
-MIT License
-
 ## Author
 
 Leo Baldwin
