@@ -41,6 +41,7 @@ classDiagram
     class Magazine
     class Person
     class Member
+    class Librarian
     class Loan
     class Reservation
     class LoanPolicy
@@ -50,50 +51,60 @@ classDiagram
     MediaItem <|-- Dvd
     MediaItem <|-- Magazine
     Person <|-- Member
+    Person <|-- Librarian
     Loan --> MediaItem
     Loan --> Member
     Reservation --> MediaItem
     Reservation --> Member
     LoanPolicy <|.. StandardLoanPolicy
+    LoanPolicy <|.. MediaTypeLoanPolicy
     FinePolicy <|.. StandardFinePolicy
+    FinePolicy <|.. MediaTypeFinePolicy
+    Library --> LoanPolicy
+    Library --> FinePolicy
 ```
 
 ## Project Structure
 
 ```
 src/
-  app/             # App entry point (main)
-  common/          # shared utilities/exceptions
-  domain/          # core model, policies, services
-  infrastructure/  # persistence/integration (if added)
-  presentation/    # console UI
-  resources/
-test/              # simple main-based tests
+  main/
+    java/
+      app/             # App entry point (main) and web server
+      common/          # shared utilities/exceptions
+      domain/          # core model, policies, services
+      infrastructure/  # persistence/integration
+      presentation/    # console UI
+    resources/
+      data/            # CSV demo data
+  test/
+    java/              # unit tests
+pom.xml                # Maven build configuration
 ```
 
 ## Getting Started
 
 ### Prerequisites
 
-- Java 11+ (Java 8 may work, but 11+ is recommended)
+- Java 17+
+- Maven 3.6+
 
 ### Build and Run
 
 ```bash
-mkdir -p out
-javac -d out $(rg --files -g "*.java" src)
-java -cp out app.App
+mvn compile exec:java -Dexec.mainClass="app.App"
+```
+
+Or to run the web server:
+
+```bash
+mvn compile exec:java -Dexec.mainClass="app.WebServer"
 ```
 
 ### Run the Tests
 
-Tests are simple `main`-based classes.
-
 ```bash
-mkdir -p out
-javac -d out $(rg --files -g "*.java" src test)
-java -cp out LoanTest
-java -cp out StandardFinePolicyTest
+mvn test
 ```
 
 ## Usage
@@ -125,7 +136,6 @@ Select option: 3
 
 ## Future Improvements
 
-- JSON or file-based persistence
 - GUI (JavaFX or Swing)
 - Authentication for librarians
 - Enhanced searching/reporting
