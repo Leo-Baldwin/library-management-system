@@ -233,6 +233,30 @@ public class Library {
         return false;
     }
 
+    // ---------------------------------------- Data Loading ----------------------------------
+
+    /**
+     * Loads a pre-existing loan into the library (for persistence restore).
+     *
+     * @param loan the loan to load
+     */
+    public void loadLoan(Loan loan) {
+        if (loan == null) throw new ValidationException("Loan cannot be null");
+        loans.put(loan.getLoanId(), loan);
+    }
+
+    /**
+     * Loads a pre-existing reservation into the library (for persistence restore).
+     *
+     * @param reservation the reservation to load
+     */
+    public void loadReservation(Reservation reservation) {
+        if (reservation == null) throw new ValidationException("Reservation cannot be null");
+        Deque<Reservation> queue = reservationsByMediaItem.computeIfAbsent(
+                reservation.getMediaId(), id -> new ArrayDeque<>());
+        queue.addLast(reservation);
+    }
+
     // ---------------------------------------- Lookups and Listings -------------------------
 
     /** @return a list of all the media items held in the library */
@@ -243,6 +267,20 @@ public class Library {
     /** @return a list of all the members of the library */
     public List<Member> listMembers() {
         return new ArrayList<>(members.values());
+    }
+
+    /** @return a list of all loans in the library */
+    public List<Loan> listLoans() {
+        return new ArrayList<>(loans.values());
+    }
+
+    /** @return a list of all reservations across all items */
+    public List<Reservation> listReservations() {
+        List<Reservation> all = new ArrayList<>();
+        for (Deque<Reservation> queue : reservationsByMediaItem.values()) {
+            all.addAll(queue);
+        }
+        return all;
     }
 
     /**

@@ -27,10 +27,10 @@ public class DemoDataLoader {
 
 
     public static void loadDemoData(Library library) {
-        loadCsv("resources/data/members.csv",   new MemberFactory(),   library::addMember);
-        loadCsv("resources/data/books.csv",     new BookFactory(),     library::addItem);
-        loadCsv("resources/data/dvds.csv",      new DvdFactory(),      library::addItem);
-        loadCsv("resources/data/magazines.csv", new MagazineFactory(), library::addItem);
+        loadCsv("data/members.csv",   new MemberFactory(),   library::addMember);
+        loadCsv("data/books.csv",     new BookFactory(),     library::addItem);
+        loadCsv("data/dvds.csv",      new DvdFactory(),      library::addItem);
+        loadCsv("data/magazines.csv", new MagazineFactory(), library::addItem);
     }
 
     private static <T> void loadCsv(String classpath,
